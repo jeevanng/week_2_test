@@ -1,13 +1,13 @@
-const{rollDice} = require('../src/diceRolling');
+const{rollDice, rollDiceWithDisadvantage, rollDiceWithAdvantage} = require('../src/diceRolling');
 
 
-beforeEach(() => {
-    console.log("message runs BEFORE each individual test.")
-}); 
+// beforeEach(() => {
+//     console.log("message runs BEFORE each individual test.")
+// }); 
 
-afterEach(() => {
-    console.log("message runs AFTER each individual test")
-});
+// afterEach(() => {
+//     console.log("message runs AFTER each individual test")
+// });
 
 // We can use this in a real life example. Before each test, we connect to a database. 
 // Then after the test, we can disconnect from the database.
@@ -31,9 +31,40 @@ describe("Tabletop RPG gamer...", () => {
 
     test("...wants to roll a D20 with advantage and see both rolled results as well as best roll.", () => {
 
+        let rollResult = rollDiceWithAdvantage(20);
+        // console.log("Roll Result = \n" + rollResult.rolls);
+        console.log("Roll Result: \n" + JSON.stringify(rollResult, null, 4));
+
+        expect(rollResult.finalResult).toBeGreaterThan(0);
+        expect(rollResult.finalResult).toBeLessThanOrEqual(20);
+
+        expect(rollResult.rolls).toHaveLength(2);
+        expect(rollResult.rolls).toContain(rollResult.finalResult);
+ 
     }); 
 
+    }); 
+
+
+    // let rollDiceWithDisadvantage = jest.fn().mockReturnValue({
+    //     finalResult: 1,
+    //     rolls: [
+    //         1, 20
+    //     ]
+    // });
+
     test("...wants to roll a D20 with disadvantage and see both rolled results as well as worst roll.", () => {
+
+        let rollResult = rollDiceWithDisadvantage(20);
+        // console.log("Roll Result = \n" + rollResult.rolls);
+        console.log("Roll Result: \n" + JSON.stringify(rollResult, null, 4));
+
+        expect(rollResult.finalResult).toBeGreaterThan(0);
+        expect(rollResult.finalResult).toBeLessThanOrEqual(20);
+        
+
+        expect(rollResult.rolls).toHaveLength(2);
+        expect(rollResult.rolls).toContain(rollResult.finalResult);
  
     }); 
 
@@ -114,7 +145,5 @@ describe("Tabletop RPG gamer...", () => {
         //     expect(diceResult).toBeLessThanOrEqual(8);
         // });
 
-    });
+});
  
- });
-

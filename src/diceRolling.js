@@ -10,6 +10,43 @@ function rollDice(diceSize = 6) {
     return diceTotal
 }
 
-module.exports = {
-    rollDice
+
+function rollDiceWithDisadvantage(diceSize = 6){
+    let result = {
+        finalResult: null,
+        rolls: []
+    }
+
+    // Twice, because we are rolling a die twice
+    result.rolls = [rollDice(diceSize), rollDice(diceSize)];
+
+    // Copy result.rolls into new array and only exists for 
+    // Math.min to analyse. Get minimum number
+    result.finalResult = Math.min(...result.rolls);
+
+    return result;
 }
+
+function rollDiceWithAdvantage(diceSize = 6){
+    let result = {
+        finalResult: null,
+        rolls: []
+    }
+
+    // Twice, because we are rolling a die twice
+    result.rolls = [rollDice(diceSize), rollDice(diceSize)];
+
+    // Copy result.rolls into new array and only exists for 
+    // Math.min to analyse. Get minimum number
+    result.finalResult = Math.max(...result.rolls);
+
+    return result;
+}
+
+module.exports = {
+    rollDice,
+    rollDiceWithDisadvantage,
+    rollDiceWithAdvantage
+}
+
+
