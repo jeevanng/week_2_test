@@ -40,10 +40,12 @@ describe("Tabletop RPG gamer...", () => {
 
         expect(rollResult.rolls).toHaveLength(2);
         expect(rollResult.rolls).toContain(rollResult.finalResult);
+
+        let sortedRolls = [...rollResult.rolls].sort();
+        expect(sortedRolls[0]).toBeGreaterThanOrEqual(sortedRolls[1]);
  
     }); 
 
-    }); 
 
 
     // let rollDiceWithDisadvantage = jest.fn().mockReturnValue({
@@ -145,5 +147,6 @@ describe("Tabletop RPG gamer...", () => {
         //     expect(diceResult).toBeLessThanOrEqual(8);
         // });
 
-});
+    });
  
+}); 
